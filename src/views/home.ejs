@@ -1,0 +1,34 @@
+<section class="card">
+  <h1>Saved Books</h1>
+  <% if (!books.length) { %>
+  <p class="muted">Nothing saved yet. <a href="/search">Search for books</a> to get started.</p>
+  <% } else { %>
+  <ul class="book-list">
+    <% books.forEach((book) => { %>
+    <li class="book">
+      <div class="book-info">
+        <% if (book.coverId) { %>
+        <img
+          src="https://covers.openlibrary.org/b/id/<%= book.coverId %>-M.jpg"
+          alt="Cover for <%= book.title %>"
+          class="cover"
+        />
+        <% } %>
+        <div>
+          <h3><%= book.title %></h3>
+          <% if (book.author) { %>
+          <p class="muted"><%= book.author %></p>
+          <% } %>
+          <% if (book.year) { %>
+          <p class="muted">First published: <%= book.year %></p>
+          <% } %>
+        </div>
+      </div>
+      <form method="POST" action="/api/saved/<%= book._id %>/delete" class="inline-form">
+        <button type="submit" class="danger">Remove</button>
+      </form>
+    </li>
+    <% }) %>
+  </ul>
+  <% } %>
+</section>
