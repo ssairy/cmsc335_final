@@ -1,11 +1,19 @@
+/*
+ * BookSaver Styles
+ * A warm, approachable design with personality
+ */
+
 :root {
-  --bg: #0f172a;
-  --surface: #111827;
-  --surface-alt: #1f2937;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #60a5fa;
-  --danger: #f87171;
+  --cream: #faf8f5;
+  --warm-white: #fffefb;
+  --sand: #e8e4dd;
+  --terracotta: #c4705a;
+  --terracotta-dark: #a85a46;
+  --forest: #2d4a3e;
+  --bark: #5c4a3d;
+  --charcoal: #333029;
+  --stone: #6b6560;
+  --highlight: #e9c46a;
 }
 
 * {
@@ -14,22 +22,37 @@
 
 body {
   margin: 0;
-  font-family: 'Work Sans', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  background-color: var(--cream);
+  color: var(--charcoal);
+  font-size: 17px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* Subtle paper texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 .container {
-  width: min(960px, 90vw);
+  width: min(720px, 88vw);
   margin: 0 auto;
 }
 
+/* Header */
 .topbar {
-  background: rgba(17, 24, 39, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
+  background-color: var(--forest);
+  border-bottom: 3px solid var(--terracotta);
+  padding: 0.25rem 0;
 }
 
 .topbar__content {
@@ -40,145 +63,274 @@ body {
 }
 
 .logo {
+  font-family: 'Lora', Georgia, serif;
   font-weight: 700;
-  color: var(--text);
+  font-size: 1.5rem;
+  color: var(--cream);
   text-decoration: none;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
+}
+
+.logo::before {
+  content: "📚 ";
+}
+
+.nav {
+  display: flex;
+  gap: 0.25rem;
 }
 
 .nav a {
-  color: var(--muted);
+  color: var(--sand);
   text-decoration: none;
-  margin-left: 1rem;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
-  color: var(--text);
+  background-color: rgba(255,255,255,0.1);
+  color: var(--warm-white);
 }
 
+/* Main content */
 main {
-  padding: 2rem 0;
+  padding: 2.5rem 0 3rem;
 }
 
 .card {
-  background: var(--surface);
-  padding: 1.5rem;
-  border-radius: 14px;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background-color: var(--warm-white);
+  padding: 2rem 2.25rem;
+  border-radius: 4px;
+  box-shadow:
+    0 1px 3px rgba(92, 74, 61, 0.08),
+    0 8px 24px rgba(92, 74, 61, 0.06);
+  border: 1px solid var(--sand);
+  position: relative;
+}
+
+/* Decorative corner fold */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 28px 28px 0;
+  border-color: transparent var(--cream) transparent transparent;
 }
 
 .card h1 {
-  margin-top: 0;
+  margin: 0 0 0.5rem;
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.75rem;
+  color: var(--forest);
+  border-bottom: 2px solid var(--sand);
+  padding-bottom: 0.75rem;
 }
 
+/* Search form */
 .search-form {
-  display: grid;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
-.search-form input,
-.search-form button,
-.inline-form button {
-  padding: 0.85rem 1rem;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  font-size: 1rem;
+.search-form label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--stone);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .search-form input {
-  background: var(--surface-alt);
-  color: var(--text);
-  border-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--sand);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: var(--cream);
+  color: var(--charcoal);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(196, 112, 90, 0.15);
+}
+
+.search-form input::placeholder {
+  color: var(--stone);
+  opacity: 0.7;
 }
 
 .search-form button,
 .inline-form button {
-  background: var(--accent);
-  color: #0b1224;
-  font-weight: 700;
+  margin-top: 1rem;
+  padding: 0.85rem 1.75rem;
+  background-color: var(--terracotta);
+  color: var(--warm-white);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 120ms ease, box-shadow 120ms ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .search-form button:hover,
 .inline-form button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(96, 165, 250, 0.3);
+  background-color: var(--terracotta-dark);
+}
+
+.search-form button:active,
+.inline-form button:active {
+  transform: scale(0.98);
 }
 
 .inline-form {
   margin: 0;
 }
 
+.inline-form button {
+  margin-top: 0;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+/* Book list */
 .book-list {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
-  display: grid;
-  gap: 1rem;
+  margin: 1.5rem 0 0;
 }
 
 .book {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem;
-  background: var(--surface-alt);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background-color: var(--cream);
+  border: 1px solid var(--sand);
+  border-left: 4px solid var(--terracotta);
+  margin-bottom: 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.book:hover {
+  box-shadow: 0 4px 12px rgba(92, 74, 61, 0.1);
+}
+
+.book:last-child {
+  margin-bottom: 0;
 }
 
 .book-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
+  flex: 1;
+}
+
+.book h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--bark);
+  line-height: 1.4;
 }
 
 .cover {
-  width: 70px;
-  height: 100px;
+  width: 65px;
+  height: 95px;
   object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+  flex-shrink: 0;
 }
 
 .muted {
-  color: var(--muted);
+  color: var(--stone);
   margin: 0.2rem 0;
+  font-size: 0.9rem;
 }
 
+.muted a {
+  color: var(--terracotta);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.muted a:hover {
+  color: var(--terracotta-dark);
+}
+
+/* Error state */
 .error {
-  color: #fecdd3;
-  background: rgba(248, 113, 113, 0.08);
-  border: 1px solid rgba(248, 113, 113, 0.5);
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
+  color: #8b2d2d;
+  background-color: #fef2f2;
+  border: 1px solid #e8b4b4;
+  border-left: 4px solid #c45a5a;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  margin: 1rem 0;
 }
 
+/* Danger button */
 button.danger {
-  background: var(--danger);
-  color: #fff;
-  box-shadow: 0 10px 20px rgba(248, 113, 113, 0.2);
+  background-color: #c45a5a;
+  color: white;
 }
 
+button.danger:hover {
+  background-color: #a84848;
+}
+
+/* Footer */
 .footer {
-  padding: 1.5rem 0 2rem;
-  color: var(--muted);
-  font-size: 0.95rem;
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--sand);
+  margin-top: 2rem;
 }
 
-@media (max-width: 640px) {
+.footer p {
+  margin: 0;
+  color: var(--stone);
+  font-size: 0.85rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card::after {
+    display: none;
+  }
+
   .book {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .book-info {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .book-info {
-    width: 100%;
+  .cover {
+    width: 80px;
+    height: 115px;
   }
 
   .inline-form {
@@ -187,5 +339,16 @@ button.danger {
 
   .inline-form button {
     width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .topbar__content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: center;
   }
 }
